@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Love Letter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .love-letter {
+      font-size: 1.2em;
+      margin-top: 100px;
+      width: 90%;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .floating-heart {
+      position: absolute;
+      font-size: 24px;
+      animation: fly 2s ease-out forwards;
+    }
+
+    @keyframes fly {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-200px) scale(2); }
+    }
+
+    .starter-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin-top: 50px;
+    }
+
+    .heart-button {
+      margin-top: 30px;
+      font-size: 30px;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="lagu.mp3" type="audio/mpeg">
+  </audio>
+
+  <img src="gambar.jpg" class="starter-img" alt="Gambar Pembuka">
+
+  <div class="love-letter" id="letter"></div>
+
+  <button class="heart-button" onclick="spawnHeart()">❤️</button>
+
+  <script>
+    const letterText = `As we celebrate our first mensiversarry, I find myself reflecting on the incredible journey we've shared. From our very first date to the countless moments of laughter and joy, every experience has woven a beautiful tapestry of memories that I will cherish forever.
+
+This past month has been a whirlwind of love and growth. We’ve faced challenges, but each one has only strengthened our bond. Your unwavering support and love have been my anchor, guiding me through every storm. I am endlessly grateful for your patience and understanding, especially during the tough times.
+
+I cherish the little things—the way your smile lights up a room, the sound of your laughter, and the warmth of your embrace. Each day with you has been a new adventure, and I can't wait to see where our journey takes us next. Together, we've created a life filled with love, trust, and joy.
+
+Thank you for being my love, my confidant, and my greatest supporter. I am excited for all the memories yet to come, for the dreams we will chase together, and for the love that will only grow deeper with each passing month.
+
+Here's to us, to the laughter we’ve shared, the challenges we've overcome, and the love that continues to bloom. Happy Mensiversarry, my love! I look forward to many more months and more years of happiness by your side.
+
+With all my love.`.split(" ");
+
+    let index = 0;
+    const target = document.getElementById("letter");
+
+    function typeLetter() {
+      if (index < letterText.length) {
+        target.innerHTML += letterText[index] + " ";
+        index++;
+        setTimeout(typeLetter, 120); // Atur kecepatan
+      }
+    }
+
+    function spawnHeart() {
+      const heart = document.createElement("div");
+      heart.className = "floating-heart";
+      heart.style.left = Math.random() * 90 + "%";
+      heart.innerHTML = "❤️";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 2000);
+    }
+
+    window.onload = typeLetter;
+  </script>
+</body>
+</html>
